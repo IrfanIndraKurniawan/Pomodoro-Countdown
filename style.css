@@ -1,11 +1,11 @@
 .container {
-  background-color: #355068;
+  background-color: #532519;
   display:flex;
   justify-content: center;
   align-items: center;
   height:75px;
   width:360px;
-  border:8px solid #d5d5ce;
+  border:8px solid #cc3c3c;
 }
 
 #tomato {
@@ -26,7 +26,7 @@
 }
 
 button {
-  background-color: #355068;
+  background-color: #532519;
   border: 0;
   padding-left: 0px;
   padding-right: 0px;

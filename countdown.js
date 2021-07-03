@@ -1,18 +1,18 @@
 const secondsInaMinute = 60;
 const minutes_25 = secondsInaMinute * 25;
-const minutes_50 = secondsInaMinute * 50;
+const minutes_50 = secondsInaMinute * 5;
 const seconds_10 = 10; //for testing
 
 let interval;
 let isPaused = true;
 let countdownWasStarted = false;
-let pomodoroDuration = minutes_50; //by default
+let pomodoroDuration = minutes_25; //by default
 let timeLeftInSeconds = 0;
 
 // Button Handlers
 function updateDuration() {
   //The pomodoro duration is by default 50, but we can change to 25!
-  if(pomodoroDuration == minutes_50 ) {
+  if (pomodoroDuration == minutes_50) {
     pomodoroDuration = minutes_25;
   } else {
     pomodoroDuration = minutes_50;
@@ -27,7 +27,7 @@ function playPauseCountdown() {
 
   updatePlayPauseButton();
 
-  if(!countdownWasStarted) {
+  if (!countdownWasStarted) {
     //This function could be called after initiating the timer,
     //so we need to differentiate when its start vs pause vs resume
     resetCountdown()
@@ -36,7 +36,7 @@ function playPauseCountdown() {
 
   countdownWasStarted = true
 
-  if(isPaused) {
+  if (isPaused) {
     stopCountdown()
   } else {
     // Update the count down every 1 second
@@ -56,7 +56,7 @@ function restartCountdown() {
 
 // Biz Logic
 function updateCountdown() {
-  if(isPaused) {
+  if (isPaused) {
     return
   }
 
@@ -64,8 +64,8 @@ function updateCountdown() {
 
   updateTimeString();
 
-  if(timeLeftInSeconds == 0) {
-    playYoScott()
+  if (timeLeftInSeconds == 0) {
+    playNotification()
     stopCountdown()
     isPaused = true
     updatePlayPauseButton()
@@ -88,10 +88,10 @@ function resetCountdown() {
 // View Updates
 function updatePlayPauseButton() {
   let playPauseImageSrc;
-  if(isPaused) {
-    playPauseImageSrc = "playButton4x.png"
+  if (isPaused) {
+    playPauseImageSrc = "assets/images/playButton4x.png"
   } else {
-    playPauseImageSrc = "pauseButton4x.png"
+    playPauseImageSrc = "assets/images/pauseButton4x.png"
   }
   document.getElementById("playPause").src = playPauseImageSrc;
 }
@@ -100,19 +100,17 @@ function updateTimeString() {
   let minutes = Math.floor(timeLeftInSeconds / secondsInaMinute);
   let seconds = timeLeftInSeconds % secondsInaMinute;
 
-  if(seconds < 10) {
+  if (seconds < 10) {
     secondsString = "0" + seconds
   } else {
     secondsString = seconds
   }
-
   // Output the result in an element with id="demo"
   document.getElementById("countdown").innerHTML = minutes + ":" + secondsString;
 }
 
-function playYoScott() {
-  var yoScottAudio = document.getElementById("yoScottAudio");
-  yoScottAudio.play();
-
+function playNotification() {
+  var notification = document.getElementById("notification");
+  notification.play();
   document.getElementById("countdown").innerHTML = "YOO";
 }
